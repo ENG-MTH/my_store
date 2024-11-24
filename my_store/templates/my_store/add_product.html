@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Product</title>
+</head>
+<body>
+    <h1>Add New Product</h1>
+    <form method="post" enctype="multipart/form-data">  <!-- Add enctype -->
+        {% csrf_token %}
+        {{ form.as_p }}
+        {% for field in form %}
+            {% if field.errors %}
+                <ul>
+                    {% for error in field.errors %}
+                        <li style="color: red;">{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endfor %}
+        <button type="submit">Save</button>
+    </form>
+    <a href="{% url 'product_list' %}">Back to Product List</a>
+</body>
+</html>
