@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
+from decouple import config
 from pathlib import Path
 import pymysql
 import os
@@ -33,7 +33,8 @@ SECRET_KEY = 'django-insecure-a(1_n0s8#7&!m1%w#lzjh=!5z*5-xh07x#qe!b)@8-84r-94yp
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', 'localhost']
+
 
 
 # Application definition
@@ -84,16 +85,30 @@ WSGI_APPLICATION = 'my_ecommerce.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'store_db',  # Replace with your database name
+#         'USER': 'root',             # Replace with your MySQL username
+#         'PASSWORD': 'Linda33@@',# Replace with your MySQL password
+#         'HOST': '127.0.0.1',        # Use 'localhost' or the appropriate IP
+#         'PORT': '3306',
+# 'HOST': 'dpg-ct1o0j52ng1s73e88e00-a',  # Render's database host
+#         'PORT': '5432',
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'store_db',  # Replace with your database name
-        'USER': 'root',             # Replace with your MySQL username
-        'PASSWORD': 'Linda33@@',# Replace with your MySQL password
-        'HOST': '127.0.0.1',        # Use 'localhost' or the appropriate IP
-        'PORT': '3306',
+        'NAME': config('store_db'),
+        'USER': config('root@@'),
+        'PASSWORD': config('Linda33@@'),
+        'HOST': config('dpg-ct1o0j52ng1s73e88e00-a'),
+        'PORT': config('5432', default='3306'),
     }
 }
+
 
 
 
